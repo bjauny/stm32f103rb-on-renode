@@ -1,0 +1,19 @@
+# The `using` command allows the user to omit a prefix when referring to a peripheral, e.g. `gpioPortA` instead of `sysbus.gpioPortA`
+using sysbus
+
+# Create an empty Renode machine
+mach create
+
+# Load our Renode platform description file
+machine LoadPlatformDescription $ORIGIN\nucleo_f103rb-demo.repl
+
+# Setup a verbose user LED and hush the rest
+logLevel -1 gpioPortA.UserLED
+logLevel 3
+
+# Load the firmware (Debug configuration in this case)
+# We can load other format with the appropriate command (LoadBinary, LoadUImage, etc.)
+sysbus LoadELF $ORIGIN\Debug\NUCLEO-F103RB_Renode.elf
+
+# Optional: start a GDB server
+machine StartGdbServer 3333
