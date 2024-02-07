@@ -27,15 +27,25 @@ The default script uses the `Debug` configuration in the case you want to start 
 
 With the project built, you can now include the `load_and_start_renode.resc` file in a Renode instance. The last line of the script can be uncommented to start a GDB server.
 Start the machine. Nothing crazy should happen. You can now play with the user button in Renode :
+
 ```shell
 gpioPortC.UserButton PressAndRelease
 ```
 
 You should see the results in the log window :
-```
+
+```shell
 [NOISY] gpioPortA.UserLED: LED state changed to True
 ```
 
 ## Debug
 
 The STM32CubeIDE contains a Debug configuration to connect to the remote GDB server from Renode. From now you can debug as usual like you would with a JTAG probe or any other debug device with a local physical board.
+
+## Tests
+
+The file `test-robot-renode.robot` allows to start tests in Robotframework. Just call the built-in command:
+
+```shell
+renode-test test-robot-renode.robot
+```

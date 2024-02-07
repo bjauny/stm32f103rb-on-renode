@@ -1,0 +1,17 @@
+build-job:
+  image: wsbu/stm32cubeide
+  script:
+    - /opt/stm32cubeide/stm32cubeide --launcher.suppressErrors -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -build NUCLEO-F103RB_Renode/Debug -import ../stm32f103r-on-renode/
+  artifacts:
+    paths:
+      - NUCLEO-F103RB_Renode.elf
+
+test-job:
+  image: antmicro/renode
+  script:
+    - renode-test ./test-robot-renode.robot
+  dependencies:
+    - build-job
+  artifacts:
+    paths:
+      - report.html 

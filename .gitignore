@@ -1,2 +1,10 @@
 Debug
 Release
+logs
+snapshots
+
+# Robotframework files
+log.html
+report.html
+robot_output.xml
+results-*.xml
